@@ -1,0 +1,291 @@
+package studentinfosystem;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class StudentInfoSystem {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        HashMap<String, Student> studentRecords = new HashMap<>();
+
+        while (true) {
+            System.out.println(" STUDENT INFORMATION SYSTEM ");
+            System.out.println("\n1  Add Student");
+            System.out.println("2  Search Student");
+            System.out.println("3  Update Student");
+            System.out.println("4  Remove Student");
+            System.out.println("5  View All Students");
+            System.out.println("6  Exit");
+            System.out.print("Choose option: ");
+
+            int option = sc.nextInt();
+            sc.nextLine();
+
+            switch (option) {
+
+                case 1:
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Student ID: ");
+                    String studentId = sc.nextLine();
+                    System.out.print("Enter Gender: ");
+                    String gender = sc.nextLine();
+                    System.out.print("Enter Age: ");
+                    int age = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Enter Contact Number: ");
+                    String contact = sc.nextLine();
+                    System.out.print("Enter Email: ");
+                    String email = sc.nextLine();
+                    System.out.print("Enter Year Level: ");
+                    int yearLevel = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Enter Course: ");
+                    String course = sc.nextLine();
+
+                    Student student = new Student(name, studentId, gender, age, contact, email, yearLevel, course);
+                    studentRecords.put(name, student);
+
+                    System.out.println("Student added.");
+                    break;
+                case 2:
+                    if (studentRecords.isEmpty()) {
+                        System.out.println("No student available.");
+                        break;
+                    }
+
+                    System.out.println("\nSEARCH STUDENT");
+                    System.out.println("1 - Name");
+                    System.out.println("2 - Student ID");
+                    System.out.println("3 - Gender");
+                    System.out.println("4 - Age");
+                    System.out.println("5 - Contact Number");
+                    System.out.println("6 - Email");
+                    System.out.println("7 - Year Level");
+                    System.out.println("8 - Course");
+                    System.out.print("Choose search method: ");
+                    int searchOption = sc.nextInt();
+                    sc.nextLine();
+
+                    String strSearch = "";
+                    int intSearch = 0;
+
+                    switch (searchOption) {
+                        case 1:
+                            System.out.print("Enter Name: ");
+                            strSearch = sc.nextLine();
+                            break;
+                        case 2:
+                            System.out.print("Enter Student ID: ");
+                            strSearch = sc.nextLine();
+                            break;
+                        case 3:
+                            System.out.print("Enter Gender: ");
+                            strSearch = sc.nextLine();
+                            break;
+                        case 4:
+                            System.out.print("Enter Age: ");
+                            intSearch = sc.nextInt();
+                            sc.nextLine();
+                            break;
+                        case 5:
+                            System.out.print("Enter Contact Number: ");
+                            strSearch = sc.nextLine();
+                            break;
+                        case 6:
+                            System.out.print("Enter Email: ");
+                            strSearch = sc.nextLine();
+                            break;
+                        case 7:
+                            System.out.print("Enter Year Level: ");
+                            intSearch = sc.nextInt();
+                            sc.nextLine();
+                            break;
+                        case 8:
+                            System.out.print("Enter Course: ");
+                            strSearch = sc.nextLine();
+                            break;
+                        default:
+                            System.out.println("Invalid search option.");
+                            break;
+                    }
+
+                    boolean anyFound = false;
+
+                    System.out.printf("%-15s %-10s %-8s %-5s %-15s %-20s %-10s %-15s%n",
+                            "Name", "ID", "Gender", "Age", "Contact", "Email", "Year", "Course");
+                    System.out.println("------------------------------------------------------------------------------------------------");
+
+                    for (Student s : studentRecords.values()) {
+                        boolean match = false;
+
+                        switch (searchOption) {
+                            case 1:
+                                if (s.getName().equalsIgnoreCase(strSearch)) {
+                                    match = true;
+                                }
+                                break;
+                            case 2:
+                                if (s.getStudentId().equalsIgnoreCase(strSearch)) {
+                                    match = true;
+                                }
+                                break;
+                            case 3:
+                                if (s.getGender().equalsIgnoreCase(strSearch)) {
+                                    match = true;
+                                }
+                                break;
+                            case 4:
+                                if (s.getAge() == intSearch) {
+                                    match = true;
+                                }
+                                break;
+                            case 5:
+                                if (s.getContactNumber().equalsIgnoreCase(strSearch)) {
+                                    match = true;
+                                }
+                                break;
+                            case 6:
+                                if (s.getEmail().equalsIgnoreCase(strSearch)) {
+                                    match = true;
+                                }
+                                break;
+                            case 7:
+                                if (s.getYearLevel() == intSearch) {
+                                    match = true;
+                                }
+                                break;
+                            case 8:
+                                if (s.getCourse().equalsIgnoreCase(strSearch)) {
+                                    match = true;
+                                }
+                                break;
+                        }
+
+                        if (match) {
+                            System.out.printf("%-15s %-10s %-8s %-5d %-15s %-20s %-10d %-15s%n",
+                                    s.getName(), s.getStudentId(), s.getGender(), s.getAge(),
+                                    s.getContactNumber(), s.getEmail(), s.getYearLevel(), s.getCourse());
+                            anyFound = true;
+                        }
+                    }
+
+                    if (!anyFound) {
+                        System.out.println("No student available.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter name to update: ");
+                    String updateName = sc.nextLine();
+
+                    if (studentRecords.containsKey(updateName)) {
+                        System.out.println("Enter new details:");
+
+                        System.out.print("Enter Name: ");
+                        String updName = sc.nextLine();
+
+                        System.out.print("Enter Student ID: ");
+                        String updId = sc.nextLine();
+
+                        System.out.print("Enter Gender: ");
+                        String updGender = sc.nextLine();
+
+                        System.out.print("Enter Age: ");
+                        int updAge = sc.nextInt();
+                        sc.nextLine();
+
+                        System.out.print("Enter Contact Number: ");
+                        String updContact = sc.nextLine();
+
+                        System.out.print("Enter Email: ");
+                        String updEmail = sc.nextLine();
+
+                        System.out.print("Enter Year Level: ");
+                        int updYear = sc.nextInt();
+                        sc.nextLine();
+
+                        System.out.print("Enter Course: ");
+                        String updCourse = sc.nextLine();
+
+                        Student updatedStudent = new Student(
+                                updName, updId, updGender, updAge,
+                                updContact, updEmail, updYear, updCourse
+                        );
+
+                        System.out.println("Student updated.");
+                    } else {
+                        System.out.println("Student not found.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter name to remove: ");
+                    String removeName = sc.nextLine();
+
+                    if (studentRecords.containsKey(removeName)) {
+                        studentRecords.remove(removeName);
+                        System.out.println("Student removed.");
+                    } else {
+                        System.out.println("Student not found.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("\n                                             ALL STUDENTS ");
+
+                    if (studentRecords.isEmpty()) {
+                        System.out.println("No records found.");
+                    } else {
+                        System.out.printf("%-15s %-10s %-8s %-5s %-15s %-20s %-10s %-15s%n",
+                                "Name", "ID", "Gender", "Age", "Contact", "Email", "Year", "Course");
+                        System.out.println("------------------------------------------------------------------------------------------------");
+
+                        for (Student s : studentRecords.values()) {
+                            System.out.printf("%-15s %-10s %-8s %-5d %-15s %-20s %-10d %-15s%n",
+                                    s.name, s.studentId, s.gender, s.age,
+                                    s.contactNumber, s.email, s.yearLevel, s.course);
+                        }
+                    }
+                    break;
+
+                case 6:
+                    System.out.println("System closed.");
+                    System.exit(0);
+                    break;
+                case 7:
+                    System.out.print("Enter course to search (e.g., BSIT, BSHM): ");
+                    String courseSearch = sc.nextLine().trim();
+
+                    boolean foundCourse = false;
+
+                    System.out.println("\n--- Students in " + courseSearch.toUpperCase() + " ---");
+
+                    for (Student s : studentRecords.values()) {
+                        if (s.getCourse().equalsIgnoreCase(courseSearch)) {
+                            System.out.println("Name: " + s.getName());
+                            System.out.println("ID: " + s.getStudentId());
+                            System.out.println("Gender: " + s.getGender());
+                            System.out.println("Age: " + s.getAge());
+                            System.out.println("Contact: " + s.getContactNumber());
+                            System.out.println("Email: " + s.getEmail());
+                            System.out.println("Year Level: " + s.getYearLevel());
+                            System.out.println("Course: " + s.getCourse());
+                            System.out.println("-----------------------------");
+                            foundCourse = true;
+                        }
+                    }
+
+                    if (!foundCourse) {
+                        System.out.println("No students enrolled in this course.");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+    }
+}
