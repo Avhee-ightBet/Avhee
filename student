@@ -2,17 +2,21 @@ package studentinfosystem;
 
 public class Student implements Display {
 
-    String name;
-    String studentId;
-    String gender;
-    int age;
-    String contactNumber;
-    String email;
-    int yearLevel;
-    String course;
+    private String name;
+    private String studentId;
+    private String gender;
+    private int age;
+    private String contactNumber;
+    private String email;
+    private int yearLevel;
+    private String course;
+    private String emergencyContact;
+    private String emergencyRelation;
+    private String emergencyNumber;
 
     Student(String name, String studentId, String gender, int age, String contactNumber,
-            String email, int yearLevel, String course) {
+            String email, int yearLevel, String course,
+            String emergencyContact, String emergencyRelation, String emergencyNumber) {
         this.name = name;
         this.studentId = studentId;
         this.gender = gender;
@@ -21,55 +25,35 @@ public class Student implements Display {
         this.email = email;
         this.yearLevel = yearLevel;
         this.course = course;
+        this.emergencyContact = emergencyContact;
+        this.emergencyRelation = emergencyRelation;
+        this.emergencyNumber = emergencyNumber;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getContactNumber() {
-        return contactNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public int getYearLevel() {
-        return yearLevel;
-    }
-
-    public String getCourse() {
-        return course;
-    }
-
-    public void updateInfo(String newCourse, int newYearLevel) {
-        this.course = newCourse;
-        this.yearLevel = newYearLevel;
-    }
+    public String getName() { return name; }
+    public String getStudentId() { return studentId; }
+    public String getGender() { return gender; }
+    public int getAge() { return age; }
+    public String getContactNumber() { return contactNumber; }
+    public String getEmail() { return email; }
+    public int getYearLevel() { return yearLevel; }
+    public String getCourse() { return course; }
+    public String getEmergencyContact() { return emergencyContact; }
+    public String getEmergencyRelation() { return emergencyRelation; }
+    public String getEmergencyNumber() { return emergencyNumber; }
 
     public String getInfo() {
-        return "ID: " + studentId + ", Gender: " + gender + ", Age: " + age
+        return "Name: " + name + ", ID: " + studentId + ", Gender: " + gender + ", Age: " + age
                 + ", Contact: " + contactNumber + ", Email: " + email
-                + ", Year Level: " + yearLevel + ", Course: " + course;
+                + ", Year Level: " + yearLevel + ", Course: " + course
+                + ", Emergency Contact: " + emergencyContact
+                + ", Relationship: " + emergencyRelation
+                + ", Emergency Number: " + emergencyNumber;
     }
 
     @Override
     public void Display() {
         System.out.println(getInfo());
-
     }
-
 }
+
