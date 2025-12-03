@@ -14,9 +14,9 @@ public class Student implements Display {
     private String emergencyRelation;
     private String emergencyNumber;
 
-    Student(String name, String studentId, String gender, int age, String contactNumber,
-            String email, int yearLevel, String course,
-            String emergencyContact, String emergencyRelation, String emergencyNumber) {
+    public Student(String name, String studentId, String gender, int age, String contactNumber,
+                   String email, int yearLevel, String course,
+                   String emergencyContact, String emergencyRelation, String emergencyNumber) {
         this.name = name;
         this.studentId = studentId;
         this.gender = gender;
@@ -30,6 +30,7 @@ public class Student implements Display {
         this.emergencyNumber = emergencyNumber;
     }
 
+    // Getters
     public String getName() { return name; }
     public String getStudentId() { return studentId; }
     public String getGender() { return gender; }
@@ -42,6 +43,20 @@ public class Student implements Display {
     public String getEmergencyRelation() { return emergencyRelation; }
     public String getEmergencyNumber() { return emergencyNumber; }
 
+    // Setters
+    public void setName(String name) { this.name = name; }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
+    public void setGender(String gender) { this.gender = gender; }
+    public void setAge(int age) { this.age = age; }
+    public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
+    public void setEmail(String email) { this.email = email; }
+    public void setYearLevel(int yearLevel) { this.yearLevel = yearLevel; }
+    public void setCourse(String course) { this.course = course; }
+    public void setEmergencyContact(String emergencyContact) { this.emergencyContact = emergencyContact; }
+    public void setEmergencyRelation(String emergencyRelation) { this.emergencyRelation = emergencyRelation; }
+    public void setEmergencyNumber(String emergencyNumber) { this.emergencyNumber = emergencyNumber; }
+
+    // Info
     public String getInfo() {
         return "Name: " + name + ", ID: " + studentId + ", Gender: " + gender + ", Age: " + age
                 + ", Contact: " + contactNumber + ", Email: " + email
@@ -56,4 +71,3 @@ public class Student implements Display {
         System.out.println(getInfo());
     }
 }
-
