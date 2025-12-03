@@ -11,17 +11,18 @@ public class StudentInfoSystem {
 
         while (true) {
             System.out.println("\nSTUDENT INFORMATION SYSTEM");
-            System.out.println("1  Add Student");
-            System.out.println("2  Search Student");
-            System.out.println("3  Update Student");
-            System.out.println("4  Remove Student");
-            System.out.println("5  View All Students");
+            System.out.println("1  Add Student Information");
+            System.out.println("2  Search Student Information");
+            System.out.println("3  Update Student Information");
+            System.out.println("4  Remove Student Information");
+            System.out.println("5  View All Students Information");
             System.out.println("6  Exit");
             System.out.print("Choose option: ");
             int option = sc.nextInt();
             sc.nextLine();
 
             switch (option) {
+
                 // ADD STUDENT
                 case 1:
                     System.out.print("Enter Name: ");
@@ -38,22 +39,16 @@ public class StudentInfoSystem {
                     while (true) {
                         System.out.print("Enter Contact Number: ");
                         contact = sc.nextLine().trim();
-                        if (contact.matches("\\d{11}")) {
-                            break;
-                        } else {
-                            System.out.println("Invalid contact number.");
-                        }
+                        if (contact.matches("\\d{11}")) break;
+                        else System.out.println("Invalid contact number.");
                     }
 
                     String email;
                     while (true) {
                         System.out.print("Enter Email: ");
                         email = sc.nextLine().trim();
-                        if (email.contains("@")) {
-                            break;
-                        } else {
-                            System.out.println("Invalid email.");
-                        }
+                        if (email.toLowerCase().endsWith("@gmail.com")) break;
+                        else System.out.println("Invalid email.");
                     }
 
                     int yearLevel;
@@ -61,32 +56,24 @@ public class StudentInfoSystem {
                         System.out.print("Enter Year Level: ");
                         yearLevel = sc.nextInt();
                         sc.nextLine();
-                        if (yearLevel >= 1 && yearLevel <= 4) {
-                            break;
-                        } else {
-                            System.out.println("Invalid year level.");
-                        }
+                        if (yearLevel >= 1 && yearLevel <= 4) break;
+                        else System.out.println("Invalid year level.");
                     }
 
                     String course;
                     while (true) {
                         System.out.print("Enter Course: ");
                         course = sc.nextLine().trim().toUpperCase();
-                        if (course.equals("BSIT") || course.equals("BSHM") || course.equals("BSTM") || course.equals("BSCPE")) {
-                            break;
-                        } else {
-                            System.out.println("Invalid course. (BSIT, BSHM, BSTM, BSCPE)");
-                        }
+                        if (course.equals("BSIT") || course.equals("BSHM") || course.equals("BSTM") || course.equals("BSCPE")) break;
+                        else System.out.println("Invalid course.");
                     }
+
                     String emNumber;
                     while (true) {
                         System.out.print("Enter Emergency Contact Number: ");
                         emNumber = sc.nextLine().trim();
-                        if (emNumber.matches("\\d{11}")) {
-                            break;
-                        } else {
-                            System.out.println("Invalid number.");
-                        }
+                        if (emNumber.matches("\\d{11}")) break;
+                        else System.out.println("Invalid number.");
                     }
 
                     System.out.print("Enter Emergency Contact Name: ");
@@ -96,8 +83,9 @@ public class StudentInfoSystem {
 
                     Student student = new Student(name, studentId, gender, age, contact, email,
                             yearLevel, course, emContact, emRelation, emNumber);
-                    studentRecords.put(name, student);
-                    System.out.println("   --Student added--");
+
+                    studentRecords.put(studentId, student);
+                    System.out.println("       --Student added--");
                     break;
 
                 // SEARCH STUDENT
@@ -164,7 +152,6 @@ public class StudentInfoSystem {
                     }
 
                     boolean anyFound = false;
-
                     System.out.printf("%-15s %-10s %-8s %-5s %-15s %-20s %-10s %-15s %-20s %-15s %-15s%n",
                             "Name", "ID", "Gender", "Age", "Contact", "Email", "Year", "Course",
                             "Emergency Contact", "Relation", "Emergency Number");
@@ -174,44 +161,28 @@ public class StudentInfoSystem {
                         boolean match = false;
                         switch (searchOption) {
                             case 1:
-                                if (s.getName().equalsIgnoreCase(strSearch)) {
-                                    match = true;
-                                }
+                                if (s.getName().equalsIgnoreCase(strSearch)) match = true;
                                 break;
                             case 2:
-                                if (s.getStudentId().equalsIgnoreCase(strSearch)) {
-                                    match = true;
-                                }
+                                if (s.getStudentId().equalsIgnoreCase(strSearch)) match = true;
                                 break;
                             case 3:
-                                if (s.getGender().equalsIgnoreCase(strSearch)) {
-                                    match = true;
-                                }
+                                if (s.getGender().equalsIgnoreCase(strSearch)) match = true;
                                 break;
                             case 4:
-                                if (s.getAge() == intSearch) {
-                                    match = true;
-                                }
+                                if (s.getAge() == intSearch) match = true;
                                 break;
                             case 5:
-                                if (s.getContactNumber().equals(strSearch)) {
-                                    match = true;
-                                }
+                                if (s.getContactNumber().equals(strSearch)) match = true;
                                 break;
                             case 6:
-                                if (s.getEmail().equalsIgnoreCase(strSearch)) {
-                                    match = true;
-                                }
+                                if (s.getEmail().equalsIgnoreCase(strSearch)) match = true;
                                 break;
                             case 7:
-                                if (s.getYearLevel() == intSearch) {
-                                    match = true;
-                                }
+                                if (s.getYearLevel() == intSearch) match = true;
                                 break;
                             case 8:
-                                if (s.getCourse().equalsIgnoreCase(strSearch)) {
-                                    match = true;
-                                }
+                                if (s.getCourse().equalsIgnoreCase(strSearch)) match = true;
                                 break;
                         }
                         if (match) {
@@ -222,16 +193,15 @@ public class StudentInfoSystem {
                             anyFound = true;
                         }
                     }
-                    if (!anyFound) {
-                        System.out.println("No student available.");
-                    }
+                    if (!anyFound) System.out.println("No student found.");
                     break;
 
                 // UPDATE STUDENT
                 case 3:
-                    System.out.print("Enter name to update: ");
-                    String updateName = sc.nextLine();
-                    if (studentRecords.containsKey(updateName)) {
+                    System.out.print("Enter Student ID to update: ");
+                    String updateId = sc.nextLine();
+
+                    if (studentRecords.containsKey(updateId)) {
                         System.out.println("Enter new details:");
 
                         System.out.print("Enter Name: ");
@@ -248,56 +218,43 @@ public class StudentInfoSystem {
                         while (true) {
                             System.out.print("Enter Contact Number: ");
                             updContact = sc.nextLine().trim();
-                            if (updContact.matches("\\d{11}")) {
-                                break;
-                            } else {
-                                System.out.println("Invalid contact number.");
-                            }
+                            if (updContact.matches("\\d{11}")) break;
+                            else System.out.println("Invalid contact number.");
                         }
 
                         String updEmail;
                         while (true) {
                             System.out.print("Enter Email: ");
                             updEmail = sc.nextLine().trim();
-                            if (updEmail.contains("@")) {
-                                break;
-                            } else {
-                                System.out.println("Invalid email.");
-                            }
+                            if (updEmail.toLowerCase().endsWith("@gmail.com")) break;
+                            else System.out.println("Invalid email.");
                         }
 
                         int updYear;
                         while (true) {
-                            System.out.print("Enter Year Level (1, 2, 3, 4): ");
+                            System.out.print("Enter Year Level: ");
                             updYear = sc.nextInt();
                             sc.nextLine();
-                            if (updYear >= 1 && updYear <= 4) {
-                                break;
-                            } else {
-                                System.out.println("Invalid year level.");
-                            }
+                            if (updYear >= 1 && updYear <= 4) break;
+                            else System.out.println("Invalid year level.");
                         }
 
                         String updCourse;
                         while (true) {
-                            System.out.print("Enter Course (BSIT, BSHM, BSTM, BSCPE): ");
+                            System.out.print("Enter Course: ");
                             updCourse = sc.nextLine().trim().toUpperCase();
-                            if (updCourse.equals("BSIT") || updCourse.equals("BSHM") || updCourse.equals("BSTM") || updCourse.equals("BSCPE")) {
-                                break;
-                            } else {
-                                System.out.println("Invalid course. (BSIT, BSHM, BSTM, BSCPE)");
-                            }
+                            if (updCourse.equals("BSIT") || updCourse.equals("BSHM") || updCourse.equals("BSTM") || updCourse.equals("BSCPE")) break;
+                            else System.out.println("Invalid course.");
                         }
+
                         String updEmNumber;
                         while (true) {
                             System.out.print("Enter Emergency Contact Number: ");
                             updEmNumber = sc.nextLine().trim();
-                            if (updEmNumber.matches("\\d{11}")) {
-                                break;
-                            } else {
-                                System.out.println("Invalid number.");
-                            }
+                            if (updEmNumber.matches("\\d{11}")) break;
+                            else System.out.println("Invalid number.");
                         }
+
                         System.out.print("Enter Emergency Contact Name: ");
                         String updEmContact = sc.nextLine();
                         System.out.print("Enter Relationship with Emergency Contact: ");
@@ -306,24 +263,21 @@ public class StudentInfoSystem {
                         Student updatedStudent = new Student(updName, updId, updGender, updAge,
                                 updContact, updEmail, updYear, updCourse, updEmContact, updEmRelation, updEmNumber);
 
-                        studentRecords.remove(updateName);
-                        studentRecords.put(updName, updatedStudent);
+                        studentRecords.remove(updateId);
+                        studentRecords.put(updId, updatedStudent);
+
                         System.out.println("Student updated.");
-                    } else {
-                        System.out.println("Student not found.");
-                    }
+                    } else System.out.println("Student not found.");
                     break;
 
                 // REMOVE STUDENT
                 case 4:
-                    System.out.print("Enter name to remove: ");
-                    String removeName = sc.nextLine();
-                    if (studentRecords.containsKey(removeName)) {
-                        studentRecords.remove(removeName);
+                    System.out.print("Enter Student ID to remove: ");
+                    String removeId = sc.nextLine();
+                    if (studentRecords.containsKey(removeId)) {
+                        studentRecords.remove(removeId);
                         System.out.println("Student removed.");
-                    } else {
-                        System.out.println("Student not found.");
-                    }
+                    } else System.out.println("Student not found.");
                     break;
 
                 // VIEW ALL
@@ -348,7 +302,6 @@ public class StudentInfoSystem {
                 case 6:
                     System.out.println("System closed.");
                     System.exit(0);
-                    break;
 
                 default:
                     System.out.println("Invalid option.");
@@ -356,4 +309,3 @@ public class StudentInfoSystem {
         }
     }
 }
-
